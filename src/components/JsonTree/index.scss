@@ -1,0 +1,83 @@
+.json-tree {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+
+  &.root {
+    padding: 0.75rem;
+  }
+}
+
+.toggle {
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  width: 1em;
+  color: #888;
+  font-size: 0.7rem;
+  vertical-align: middle;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.key {
+  color: #881391;
+}
+
+.colon {
+  color: #333;
+}
+
+.bracket {
+  color: #333;
+  font-weight: 600;
+}
+
+.close-bracket {
+  display: block;
+}
+
+.collapsed-hint {
+  color: #999;
+  font-style: italic;
+  cursor: pointer;
+  margin: 0 0.25rem;
+  font-size: 0.8rem;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+.children {
+  padding-left: 1.25rem;
+  border-left: 1px solid #e8e8e8;
+  margin-left: 0.4rem;
+}
+
+.entry {
+  display: block;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.type-string {
+  color: #22863a;
+}
+
+.type-number {
+  color: #005cc5;
+}
+
+.type-boolean {
+  color: #d73a49;
+}
+
+.type-null {
+  color: #6a737d;
+  font-style: italic;
+}

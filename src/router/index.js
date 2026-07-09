@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/tools/json-formatter',
     name: 'JsonFormatter',
-    component: () => import('../views/tools/JsonFormatter.vue'),
+    component: () => import('../views/tools/JsonFormatter/index.vue'),
   },
 ]
 

@@ -1,0 +1,168 @@
+.json-formatter {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.toast {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  animation: toast-in 0.2s ease;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.back {
+  color: #666;
+  text-decoration: none;
+
+  &:hover {
+    color: #333;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+
+  &:hover {
+    background: #4338ca;
+  }
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  color: #333;
+
+  &:hover {
+    background: #d1d5db;
+  }
+}
+
+.error {
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+}
+
+textarea.has-error {
+  color: #dc2626;
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+}
+
+textarea {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  resize: none;
+  overflow: auto;
+}
+
+.output-tree {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.btn-copy {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  background: #10b981;
+
+  &:hover {
+    background: #059669;
+  }
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .panels {
+    grid-template-columns: 1fr;
+  }
+}
