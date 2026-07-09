@@ -2,6 +2,25 @@
   max-width: 960px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
+}
+
+.eye-care-btn {
+  position: absolute;
+  top: 2rem;
+  right: -23rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  &:hover {
+    background: #f0f5eb;
+    border-color: #a3c293;
+  }
 }
 
 .hero {

@@ -12,6 +12,16 @@ const routes = [
     name: 'JsonFormatter',
     component: () => import('../views/tools/JsonFormatter/index.vue'),
   },
+  {
+    path: '/tools/encode-decode',
+    name: 'EncodeDecode',
+    component: () => import('../views/tools/EncodeDecode/index.vue'),
+  },
+  {
+    path: '/tools/quick-copy',
+    name: 'QuickCopy',
+    component: () => import('../views/tools/QuickCopy/index.vue'),
+  },
 ]
 
 const router = createRouter({

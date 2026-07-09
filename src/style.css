@@ -9,10 +9,18 @@
   -webkit-font-smoothing: antialiased;
 }
 
+:root.eye-care {
+  background: #f0f5eb;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color: #e5e7eb;
     background: #1a1a2e;
+  }
+
+  :root.eye-care {
+    background: #2b2f2a;
   }
 }
 

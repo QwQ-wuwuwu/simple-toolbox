@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import JsonTree from '@/components/JsonTree/index.vue'
+import { copyToClipboard } from '@/utils/clipboard'
 
 const input = ref(localStorage.getItem('json-formatter-input') || '')
 const output = ref('')
@@ -61,29 +62,14 @@ function clear() {
 }
 
 function copyOutput() {
-  const text = output.value
-  const done = () => {
+  copyToClipboard(output.value).then(() => {
     copied.value = true
     toast.value = '复制成功'
     setTimeout(() => {
       copied.value = false
       toast.value = ''
     }, 1500)
-  }
-
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(done)
-  } else {
-    const ta = document.createElement('textarea')
-    ta.value = text
-    ta.style.position = 'fixed'
-    ta.style.opacity = '0'
-    document.body.appendChild(ta)
-    ta.select()
-    document.execCommand('copy')
-    document.body.removeChild(ta)
-    done()
-  }
+  })
 }
 </script>
 
