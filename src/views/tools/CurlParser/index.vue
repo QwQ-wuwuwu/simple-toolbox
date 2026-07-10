@@ -98,12 +98,20 @@ function parseParams(curlStr) {
   }
 
   // Also parse -d / --data / --data-raw / --data-urlencode body params
-  const dataRegex = /(?:--data-raw|--data-urlencode|--data|-d)\s+['"]([^'"]*)['"]/gi
+  // Support: quoted with ' or ", $'...', or unquoted values
+  const dataRegex = /(?:--data-raw|--data-urlencode|--data|-d)\s+\$?'((?:[^'\\]|\\.)*)'|(?:--data-raw|--data-urlencode|--data|-d)\s+"((?:[^"\\]|\\.)*)"|(?:--data-raw|--data-urlencode|--data|-d)\s+([^\s'"\\]+)/gi
   let match
   while ((match = dataRegex.exec(curlStr)) !== null) {
-    const body = match[1]
-    // Try as form-urlencoded
-    if (body.includes('=') && !body.startsWith('{')) {
+    const body = (match[1] || match[2] || match[3] || '')
+      .replace(/\\r\\n/g, '\r\n')
+      .replace(/\\n/g, '\n')
+      .replace(/\\(['"\\])/g, '$1')
+
+    if (body.includes('------') && body.includes('Content-Disposition: form-data')) {
+      // Parse multipart/form-data
+      parseMultipart(body)
+    } else if (body.includes('=') && !body.startsWith('{')) {
+      // Parse as form-urlencoded
       const pairs = body.split('&')
       for (const pair of pairs) {
         const eqIdx = pair.indexOf('=')
@@ -118,6 +126,25 @@ function parseParams(curlStr) {
         }
       }
     }
+  }
+}
+
+function parseMultipart(body) {
+  // Split by boundary lines (------WebKitFormBoundary...)
+  const parts = body.split(/------[^\r\n]+/)
+  for (const part of parts) {
+    const nameMatch = part.match(/Content-Disposition:\s*form-data;\s*name="([^"]+)"/)
+    if (!nameMatch) continue
+    const name = nameMatch[1]
+    // Value is after the double line break following headers
+    const headerEnd = part.indexOf('\r\n\r\n') !== -1
+      ? part.indexOf('\r\n\r\n') + 4
+      : part.indexOf('\n\n') !== -1
+        ? part.indexOf('\n\n') + 2
+        : -1
+    if (headerEnd === -1) continue
+    const value = part.substring(headerEnd).replace(/[\r\n]+$/, '')
+    params.value.push({ key: name, value, source: 'body' })
   }
 }
 
