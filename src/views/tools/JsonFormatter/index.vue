@@ -77,7 +77,6 @@ function copyOutput() {
   <div class="json-formatter">
     <div v-if="toast" class="toast">{{ toast }}</div>
     <div class="toolbar">
-      <router-link to="/" class="back">&larr; 返回首页</router-link>
       <h2>JSON 格式化</h2>
     </div>
     <div class="actions">

@@ -118,7 +118,6 @@ function download() {
   <div class="qrcode-tool">
     <div v-if="toast" class="toast">{{ toast }}</div>
     <div class="toolbar">
-      <router-link to="/" class="back">&larr; 返回首页</router-link>
       <h2>文库二维码</h2>
       <button class="btn-clear" @click="clearAll">一键清空</button>
     </div>

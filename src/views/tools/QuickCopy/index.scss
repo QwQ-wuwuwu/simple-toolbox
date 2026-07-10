@@ -46,15 +46,6 @@
   }
 }
 
-.back {
-  color: #666;
-  text-decoration: none;
-
-  &:hover {
-    color: #333;
-  }
-}
-
 .btn-add {
   padding: 0.4rem 0.8rem;
   border: none;
@@ -151,7 +142,21 @@
 
 .card-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-edit {
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+
+  &:hover {
+    color: #3b82f6;
+  }
 }
 
 .btn-copy {

@@ -81,7 +81,6 @@ function copyOutput() {
   <div class="encode-decode">
     <div v-if="toast" class="toast">{{ toast }}</div>
     <div class="toolbar">
-      <router-link to="/" class="back">&larr; 返回首页</router-link>
       <h2>编码 / 解码</h2>
     </div>
     <div class="actions">

@@ -13,6 +13,7 @@ const newName = ref('')
 const newContent = ref('')
 const toast = ref('')
 const showDialog = ref(false)
+const editingIndex = ref(-1)
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items.value))
@@ -21,16 +22,29 @@ function save() {
 function openDialog() {
   newName.value = ''
   newContent.value = ''
+  editingIndex.value = -1
   showDialog.value = true
 }
 
 function closeDialog() {
   showDialog.value = false
+  editingIndex.value = -1
+}
+
+function editItem(index) {
+  newName.value = items.value[index].name
+  newContent.value = items.value[index].content
+  editingIndex.value = index
+  showDialog.value = true
 }
 
 function addItem() {
   if (!newName.value.trim() || !newContent.value.trim()) return
-  items.value.push({ name: newName.value.trim(), content: newContent.value.trim() })
+  if (editingIndex.value >= 0) {
+    items.value[editingIndex.value] = { name: newName.value.trim(), content: newContent.value.trim() }
+  } else {
+    items.value.push({ name: newName.value.trim(), content: newContent.value.trim() })
+  }
   save()
   closeDialog()
 }
@@ -52,7 +66,6 @@ function copyItem(content) {
   <div class="quick-copy">
     <div v-if="toast" class="toast">{{ toast }}</div>
     <div class="toolbar">
-      <router-link to="/" class="back">&larr; 返回首页</router-link>
       <h2>快速复制</h2>
       <button class="btn-add" @click="openDialog">+ 添加</button>
     </div>
@@ -68,6 +81,7 @@ function copyItem(content) {
           <pre v-else class="card-content">{{ item.content }}</pre>
         </div>
         <div class="card-footer">
+          <button class="btn-edit" @click="editItem(index)">✎ 编辑</button>
           <button class="btn-copy" @click="copyItem(item.content)">复制</button>
         </div>
       </div>
@@ -76,7 +90,7 @@ function copyItem(content) {
 
     <div v-if="showDialog" class="dialog-overlay" @click.self="closeDialog">
       <div class="dialog">
-        <h3>添加复制项</h3>
+        <h3>{{ editingIndex >= 0 ? '编辑复制项' : '添加复制项' }}</h3>
         <label>名称</label>
         <input v-model="newName" placeholder="输入名称" />
         <label>内容</label>
