@@ -12,6 +12,7 @@ const tools = ref([
   { name: '编码 / 解码', path: '/tools/encode-decode', icon: 'A↔' },
   { name: '快速复制', path: '/tools/quick-copy', icon: '📋' },
   { name: '文库二维码', path: '/tools/qrcode', icon: '⊞' },
+  { name: 'cURL 解析', path: '/tools/curl-parser', icon: '⇶' },
 ])
 </script>
 

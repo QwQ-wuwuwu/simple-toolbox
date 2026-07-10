@@ -31,6 +31,11 @@ const routes = [
         name: 'QrCode',
         component: () => import('../views/tools/QrCode/index.vue'),
       },
+      {
+        path: 'tools/curl-parser',
+        name: 'CurlParser',
+        component: () => import('../views/tools/CurlParser/index.vue'),
+      },
     ],
   },
 ]

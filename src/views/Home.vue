@@ -4,6 +4,7 @@ const tools = [
   { name: '编码 / 解码', path: '/tools/encode-decode', icon: 'A↔', description: 'Base64、URL、HTML、Unicode 编解码' },
   { name: '快速复制', path: '/tools/quick-copy', icon: '📋', description: '存储常用文本片段，一键复制到剪贴板' },
   { name: '文库二维码', path: '/tools/qrcode', icon: '⊞', description: '快速生成对应路径的二维码' },
+  { name: 'cURL 解析', path: '/tools/curl-parser', icon: '⇶', description: '解析 curl 命令中的 Cookie 和请求参数' },
 ]
 </script>
 
