@@ -78,10 +78,16 @@
   gap: 0.6rem;
   background: #fff;
   transition: box-shadow 0.2s, transform 0.2s;
+  cursor: grab;
 
   &:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     transform: translateY(-2px);
+  }
+
+  &.dragging {
+    opacity: 0.5;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 }
 

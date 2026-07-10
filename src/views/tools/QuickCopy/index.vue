@@ -60,6 +60,26 @@ function copyItem(content) {
     setTimeout(() => { toast.value = '' }, 1500)
   })
 }
+
+// 拖拽排序
+const dragIndex = ref(-1)
+
+function onDragStart(index) {
+  dragIndex.value = index
+}
+
+function onDragOver(e, index) {
+  e.preventDefault()
+  if (dragIndex.value === index) return
+  const dragged = items.value.splice(dragIndex.value, 1)[0]
+  items.value.splice(index, 0, dragged)
+  dragIndex.value = index
+}
+
+function onDragEnd() {
+  dragIndex.value = -1
+  save()
+}
 </script>
 
 <template>
@@ -71,7 +91,16 @@ function copyItem(content) {
     </div>
 
     <div class="card-grid">
-      <div v-for="(item, index) in items" :key="index" class="card">
+      <div
+        v-for="(item, index) in items"
+        :key="item.name + index"
+        class="card"
+        :class="{ dragging: dragIndex === index }"
+        draggable="true"
+        @dragstart="onDragStart(index)"
+        @dragover="onDragOver($event, index)"
+        @dragend="onDragEnd"
+      >
         <div class="card-header">
           <span class="card-name">{{ item.name }}</span>
           <button class="btn-delete" @click="removeItem(index)">&times;</button>
